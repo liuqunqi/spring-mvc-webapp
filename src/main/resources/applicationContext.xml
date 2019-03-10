@@ -1,0 +1,24 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+       ">
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <!-- 属性名是 locations，使用子标签<list></list>可以指定多个数据库的配置文件，这里指定了一个-->
+        <property name="location">
+            <value>classpath:config.properties</value>
+        </property>
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+    </bean>
+
+    <!-- 注册Feign服务 -->
+    <bean name="feignClientsRegistrar"
+          class="com.wandaph.openfeign.FeignClientsRegistrar">
+        <property name="appName" value="${spring.application.name}"/>
+        <property name="port" value="${server.port}"/>
+        <property name="scanBasePackage" value="com.wandaph.webapp.clients"/>
+        <property name="serviceUrl" value="${eureka.client.serviceUrl.defaultZone}"/>
+    </bean>
+
+</beans>

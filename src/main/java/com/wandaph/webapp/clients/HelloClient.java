@@ -1,0 +1,29 @@
+package com.wandaph.webapp.clients;
+
+import com.wandaph.openfeign.annotation.FeignClient;
+import com.wandaph.webapp.dto.Person;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+/**
+ * @项目名称: spring-mvc-webapp
+ * @标题信息: HelloClient
+ * @创建人: Ailen
+ * @创建日期: 2019/3/1014:09
+ * @描述信息: TODO
+ */
+@FeignClient("spring-cloud-service")
+@RequestMapping("/cloud-service")
+public interface HelloClient {
+
+    @RequestMapping(value = "/sayHello", method = RequestMethod.POST)
+    @ResponseBody
+    String sayHello(@RequestParam("name") String name);
+
+    @RequestMapping(value = "/updatePerson", method = RequestMethod.POST)
+    @ResponseBody
+    Person updatePerson(@RequestBody Person person);
+}
