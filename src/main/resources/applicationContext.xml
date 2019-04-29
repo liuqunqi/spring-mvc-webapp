@@ -17,7 +17,7 @@
           class="com.wandaph.openfeign.FeignClientsRegistrar">
         <property name="appName" value="${spring.application.name}"/>
         <property name="port" value="${server.port}"/>
-        <property name="scanBasePackage" value="com.wandaph.webapp.clients"/>
+        <property name="scanBasePackages" value="com.wandaph.webapp.clients"/>
         <property name="serviceUrl" value="${eureka.client.serviceUrl.defaultZone}"/>
     </bean>
 
